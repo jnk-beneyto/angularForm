@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'AngularForm';
+  title = 'Angular with bootstrap, jquery and popper installed';
 }
