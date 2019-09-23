@@ -17,10 +17,15 @@ export class DishService{
         this.url = glob.url;
     }
 
-    saveDish(dish: Dish){
+    saveDish(dish: Dish):Observable<any>{
         let params = JSON.stringify(dish);
         let headers = new HttpHeaders().set('Content-type','application/json');
         return this._http.post(this.url + 'setDish', params, {headers:headers});
+    }
+
+    getDishes():Observable<any>{
+        let headers = new HttpHeaders().set('Content-type','application/json');
+        return this._http.get(this.url + 'getDishes', {headers:headers});
     }
 
 }
