@@ -1,14 +1,120 @@
-<div class="container bg-danger text-center">
-<h2>{{title}}</h2>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+  <a class="navbar-brand ml-3" href="#">Dishes</a>
+</nav>
+<!--/.Navbar -->
+<div class="container main">
+  <div class="row">
+    <div class="col-12 boxl bg-primary text-center  d-flex justify-content-center flex-column" id="titulo">
+      <h3> CRUD nodeJS / express / mongo </h3>
+    </div>
+  </div>
+  <div class="row"> 
+      <div class="container">
+        <h3> New dish</h3>
+      </div>
+  </div>
+  <div class="row">
+       
+        <div class="alert alert-success" *ngIf="ok == 'yes'">
+            <strong>Success!</strong>new dish added successfully
+        </div>
+     
+      
+        <div class="alert alert-danger" *ngIf="ok == 'no'">
+          error saving data
+        </div>
+      
+    </div>
+  <div class="row">
+    <div class="col-sm-12 col-md-6 col-lg-6" id="formAdd">
+      <div class="container mx-auto mt-2">
+        <form #dishForm="ngForm" (ngSubmit)="onSubmit(dishForm)">
+          <div class="form-group">
+            <input name="name" class="form-control" #name="ngModel" [(ngModel)]="dish.name" type="text"
+              placeholder="dishName ..." required>
+          </div>
+          <div class="container">
+            <span class="error" *ngIf="description.touched && !description.valid">
+              fill in this field
+            </span>
+          </div>
+          <div class="form-group">
+            <select name="type" class="form-control" #type="ngModel" [(ngModel)]="dish.type" required>
+              <option selected="true" disabled="disabled" >pick a type</option>
+              <option value="starter">starter</option>
+              <option value="main">main</option>
+              <option value="dessert">dessert</option>
+              <option value="drink">drink</option>
+            </select>
+          </div>
+          <div class="container">
+            <span class="error" *ngIf="type.touched && !type.valid">
+              fill in this field
+            </span>
+          </div>
+          <div class="form-group">
+            <textarea name='description' class="form-control" #description="ngModel" [(ngModel)]="dish.description"
+              rows="3" placeholder="description ..." required></textarea>
+          </div>
+          <div class="container">
+            <span class="error" *ngIf="description.touched && !description.valid">
+              fill in this field
+            </span>
+          </div>
+          <div class="form-group">
+            <input class="btn btn-primary form-control" type="submit" value="add Dish"
+              [disabled]="!dishForm.form.valid">
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="col-sm-12 col-md-6 col-lg-6 " id="listBox">
+      <div class="container">
+        <h3>dish list</h3>
+      </div>
+      <hr>
+
+      <!-- <div *ngFor="d of dish" class="card  mt-2">
+              <div class="row ">
+                <div class="col-9 ">
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-8">
+                        <h5>{{d.dishName}}</h5>
+                      </div>
+                      <div class="col-4">
+                        <h6>{{d.type}}</h6>
+                      </div>
+                    </div>
+                    <hr>
+                    <div class="row ">
+                      <div class="col-12">{{d.description}}</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-3 d-flex justify-content-center flex-column">
+                  <div class="container py-1 ">
+                    <a href="#" class="btn btn-warning w-100 ">edit</a>
+                  </div>
+                  <div class="container py-1">
+                    <a href="#" class="btn btn-danger w-100">del</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+           -->
+
+
+
+    </div>
+  </div>
 </div>
 
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content above * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * End of Placeholder * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- <footer>
+        <div class="row">
+             <div class="col-12 boxl bg-dark text-center text-success" id="footer">footer</div>           
+        </div>
+    </footer> -->
 
 
 
