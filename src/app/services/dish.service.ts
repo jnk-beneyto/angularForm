@@ -28,4 +28,8 @@ export class DishService{
         return this._http.get(this.url + 'getDishes', {headers:headers});
     }
 
+    deleteDish(id):Observable<any>{
+        let headers = new HttpHeaders().set('Content-type','application/json');
+        return this._http.delete(this.url + 'deleteDish/'+id, {headers:headers});
+    }
 }
