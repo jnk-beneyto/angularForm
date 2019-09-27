@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Dish } from 'src/app/models/dish';
 import { DishService } from 'src/app/services/dish.service';
+//import {merge} from 'rxjs';
+//import {debounceTime, distinctUntilChanged, filter, switchMap, tap} from 'rxjs/operators';
 
 
 @Component({
@@ -12,13 +14,15 @@ import { DishService } from 'src/app/services/dish.service';
 export class ListDishComponent implements OnInit {
   public title: string;
   public dishes: [Dish];
+ 
 
   constructor(private _dishService: DishService) {
     this.title = "list Dishes";
   }
 
   ngOnInit() {
-    this.getDishes();
+
+    this.refreshDishList();
   }
 
   getDishes() {
@@ -49,5 +53,15 @@ export class ListDishComponent implements OnInit {
         console.log(err);
       }
     )
+  }
+
+  editDish(dish : Dish){
+    this._dishService.selectedDish = dish;
+  }
+
+  refreshDishList(){
+    this._dishService.getDishes().subscribe((res) =>{
+      this._dishService.dishes = res as Dish[];
+    })
   }
 }

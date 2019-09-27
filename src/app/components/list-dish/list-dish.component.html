@@ -4,27 +4,27 @@
   </div>
 </div>
 <hr>
-<div *ngFor="let d of dishes" class="card  mt-2">
+<div *ngFor="let dish of _dishService.dishes" class="card  mt-2">
     <div class="row ">
       <div class="col-9 ">
         <div class="container">
           <div class="row">
             <div class="col-8">
-              <h5>{{d.name}}</h5>
+              <h5>{{dish.name}}</h5>
             </div>
             <div class="col-4">
-              <h6>{{d.type}}</h6>
+              <h6>{{dish.type}}</h6>
             </div>
           </div>
           <hr>
           <div class="row ">
-            <div class="col-12">{{d.description}}</div>
+            <div class="col-12">{{dish.description}}</div>
           </div>
         </div>
       </div>
       <div class="col-3 d-flex justify-content-center flex-column">
         <div class="container py-1 ">
-          <a href="#" class="btn btn-warning w-100 ">edit</a>
+          <a (click)="editDish(dish)" class="btn btn-warning w-100 ">edit</a>
         </div>
         <div class="container py-1">
           <a (click)="deleteDish(d._id)" class="btn btn-danger w-100">del</a>
