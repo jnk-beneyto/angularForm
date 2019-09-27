@@ -13,6 +13,9 @@ import { NavComponent } from './components/nav/nav.component';
 import { AddDishComponent } from './components/add-dish/add-dish.component';
 import { ListDishComponent } from './components/list-dish/list-dish.component';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +27,12 @@ import { ListDishComponent } from './components/list-dish/list-dish.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule, // required animations module
+    ToastrModule.forRoot(
+      {positionClass:'toast-top-right',  
+        closeButton: true}
+    ) // ToastrModule added
   ],
   providers: [DishService],
   bootstrap: [AppComponent]

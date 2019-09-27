@@ -2,17 +2,13 @@
 <div class="col-sm-12 col-md-6 col-lg-6">
   <div id="addBox">
     <div class="container">
-      <h3 class="text-center">{{title}}</h3>
+      <h3 class="text-center">{{titleCreate}}</h3>
     </div>
   </div>
   <hr>
-  <div class="row">
-    <div class="alert alert-success" *ngIf="ok == 'yes'">
-      <strong>Success!</strong>
-    </div>
-    <div class="alert alert-danger" role="alert" *ngIf="ok == 'no'">
-      error 
-    </div>
+  <div class="row alert">
+    <i class="far fa-trash-alt"></i>
+   
   </div>
   <div class="row">
     <div class="col-12" id="formAdd">
@@ -66,7 +62,7 @@
 
   <div id="listBox">
     <div class="container">
-      <h3 class="text-center">{{title}}</h3>
+      <h3 class="text-center">{{titleList}}</h3>
     </div>
   </div>
   <hr>

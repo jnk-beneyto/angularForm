@@ -2,6 +2,7 @@ import { Component,OnInit } from '@angular/core';
 import { DishService } from 'src/app/services/dish.service';
 import { Dish } from 'src/app/models/dish';
 import { NgForm } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-add-dish',
@@ -11,20 +12,33 @@ import { NgForm } from '@angular/forms';
 })
 export class AddDishComponent implements OnInit {
 
-  public title: string;
+  public titleCreate: string;
+  public titleList: string;
   public dish: Dish; 
   public ok: string;
   public dishes: [Dish];
 
-  constructor(private _dishService: DishService) {
-    this.title = 'Create dish';
+  constructor(private _dishService: DishService, private toastr: ToastrService) {
+    this.titleCreate = 'Create dish';
+    this.titleList = 'Listing dishes';
     //this.dish = new Dish("", "", "", "");
   }
+
+  showSuccess(message:string,type:string) {
+    this.toastr.success(message, type);
+  }
+  showError(message:string,type:string){  
+    this.toastr.error(message, type);  
+  
+}  
 
   ngOnInit(){
     this.resetForm();
     this.refreshDishList();
   }
+
+  
+
   resetForm(form? : NgForm){
     if (form)
       form.reset();
@@ -45,6 +59,7 @@ export class AddDishComponent implements OnInit {
             this.ok = 'yes';
             this.resetForm(form);
             this.refreshDishList();
+            this.showSuccess('saved','success');
           } else {
             this.ok = 'no';
           }
@@ -58,6 +73,7 @@ export class AddDishComponent implements OnInit {
         res => {
           if (res) {
             this.ok = 'yes';
+            this.showSuccess('updated','success');
             this.resetForm(form);
             this.refreshDishList();
           } else {
@@ -93,6 +109,7 @@ export class AddDishComponent implements OnInit {
     this._dishService.deleteDish(dish).subscribe(
       res => {
         if (res) {
+          this.showSuccess('deleted','success');
           console.log('deleted id: ' + dish._id);
           this.resetForm(form);
           this.refreshDishList();
