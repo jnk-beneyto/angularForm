@@ -1,48 +1,45 @@
 import { Injectable } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
-
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Dish } from '../models/dish';
 import { glob } from './global';
-//import  'rxjs/add/operator/map';
-//import  'rxjs/add/operator/toPromise';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 
-export class DishService{
-    public url:string;
+export class DishService {
+    public url: string;
     public selectedDish: Dish;
     public dishes: Dish[];
 
-    constructor (private _http:HttpClient){
+    constructor(private _http: HttpClient) {
         this.url = glob.url;
     }
 
-    saveDish(dish: Dish):Observable<any>{
+    saveDish(dish: Dish): Observable<any> {
         let params = JSON.stringify(dish);
-        let headers = new HttpHeaders().set('Content-type','application/json');
+        let headers = new HttpHeaders().set('Content-type', 'application/json');
         return this._http
-            .post(this.url + 'setDish', params, {headers:headers});
+            .post(this.url + 'setDish', params, { headers: headers });
     }
 
-    getDishes():Observable<any>{
-        let headers = new HttpHeaders().set('Content-type','application/json');
+    getDishes(): Observable<any> {
+        let headers = new HttpHeaders().set('Content-type', 'application/json');
         return this._http
-            .get(this.url + 'getDishes', {headers:headers});
+            .get(this.url + 'getDishes', { headers: headers });
     }
 
-    deleteDish(dish : Dish){
-        let headers = new HttpHeaders().set('Content-type','application/json');
+    deleteDish(dish: Dish) {
+        let headers = new HttpHeaders().set('Content-type', 'application/json');
         return this._http
-            .delete(this.url + 'deleteDish/'+ dish._id, {headers:headers});
+            .delete(this.url + 'deleteDish/' + dish._id, { headers: headers });
     }
 
-    updateDish(dish : Dish){
-        let headers = new HttpHeaders().set('Content-type','application/json');
+    updateDish(dish: Dish) : Observable<any>  {
+        let data = JSON.stringify(dish);
+        let headers = new HttpHeaders().set('Content-type', 'application/json');
         return this._http
-            .put(this.url + 'updateDish/'+ dish._id, dish,{headers:headers});
+            .put(this.url + 'updateDish/' + `${dish._id}`, data, { headers: headers });
     }
 }
